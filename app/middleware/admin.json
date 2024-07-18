@@ -1,15 +1,26 @@
 [
-    {
-      "name": "Admin One",
-      "email": "admin1@example.com",
-      "password": "admin123",
-      "role": "admin"
-    },
-    {
-      "name": "Admin Two",
-      "email": "admin2@example.com",
-      "password": "admin12133",
-      "role": "admin"
-    }
-  ]
-  
+  {
+    "name": "Admin One",
+    "email": "admin1@example.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "name": "Admin Two",
+    "email": "admin2@example.com",
+    "password": "admin12133",
+    "role": "sub_admin"
+  },
+  {
+    "name": "Admin three",
+    "email": "admin3@example.com",
+    "password": "admin3aaa",
+    "role": "sub_admin"
+  },
+  {
+    "name": "new sub admin",
+    "email": "newsubadmin@example.com",
+    "password": "newsuba",
+    "role": "sub_admin"
+  }
+]

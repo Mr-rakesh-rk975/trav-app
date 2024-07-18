@@ -178,7 +178,7 @@ const AdminNavbar = () => {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} style={{width: '100%'}}/>
           </Search>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton color="inherit">

@@ -39,6 +39,13 @@ const Sidebar = ({ open, onToggle }) => {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
+        <Link href="/admin/admins/" passHref>
+          <ListItem button>
+            <ListItemIcon><FontAwesomeIcon icon={faUsers} style={iconStyle} /></ListItemIcon>
+            <ListItemText primary="Admins" />
+          </ListItem>
+        </Link>
+
         <Link href="/admin/users" passHref>
           <ListItem button>
             <ListItemIcon><FontAwesomeIcon icon={faUsers} style={iconStyle} /></ListItemIcon>
