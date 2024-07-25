@@ -2,70 +2,65 @@
 
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { Button, TextField } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { 
+  Container, 
+  Typography, 
+  Box, 
+  Button 
+} from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
 
-const AdminDetail = () => {
+const AdminDetail = ({params}) => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = params;  // Get the id from the URL
   const [admin, setAdmin] = useState(null);
+  const [currentAdminRole, setCurrentAdminRole] = useState('');
 
   useEffect(() => {
+    // Fetch the current admin role from session storage
+    const storedRole = sessionStorage.getItem('role');
+    setCurrentAdminRole(storedRole);
+
+    // Fetch admin details from API
     if (id) {
-      // Fetch admin details from API
-      fetch(`/api/admins/${id}`)
+      fetch(`/api/admins/${id}`, {
+        headers: {
+          'requester-role': storedRole,
+        },
+      })
         .then(res => res.json())
-        .then(data => setAdmin(data.admin))
-        .catch(error => console.error('Error fetching admin:', error));
+        .then(data => setAdmin(data))
+        .catch(error => console.error('Error fetching admin details:', error));
     }
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Submit updated admin details to API
-    try {
-      const response = await fetch(`/api/admins/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(admin),
-      });
-      if (response.ok) {
-        // Handle success
-      } else {
-        console.error('Failed to update admin');
-      }
-    } catch (error) {
-      console.error('Error updating admin:', error);
-    }
-  };
-
-  const handleChange = (e) => {
-    setAdmin({ ...admin, [e.target.name]: e.target.value });
-  };
-
-  if (!admin) return <div>Loading...</div>;
+  if (!currentAdminRole) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div>
-      <h1>Edit Admin</h1>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          name="name"
-          label="Name"
-          value={admin.name}
-          onChange={handleChange}
-        />
-        <TextField
-          name="email"
-          label="Email"
-          value={admin.email}
-          onChange={handleChange}
-        />
-        <Button type="submit">Save</Button>
-      </form>
-    </div>
+    <Container>
+      <Box sx={{ my: 4 }}>
+        <Button
+          startIcon={<ArrowBack />}
+          onClick={() => router.back()}
+        >
+          Back
+        </Button>
+        {admin && (
+          <Box sx={{ my: 4 }}>
+            <Typography variant="h4" gutterBottom>
+              Admin Details
+            </Typography>
+            <Typography variant="body1"><strong>Name:</strong> {admin.name}</Typography>
+            <Typography variant="body1"><strong>Email:</strong> {admin.email}</Typography>
+            <Typography variant="body1"><strong>Password:</strong> {admin.password}</Typography>
+            {/* Add other admin details as needed */}
+          </Box>
+        )}
+      </Box>
+    </Container>
   );
 };
 

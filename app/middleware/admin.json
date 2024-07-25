@@ -1,26 +1,30 @@
 [
   {
-    "name": "Admin One",
-    "email": "admin1@example.com",
-    "password": "admin123",
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "password": "AlicePass123!",
+    "id": "1678901234567",
     "role": "admin"
   },
   {
-    "name": "Admin Two",
-    "email": "admin2@example.com",
-    "password": "admin12133",
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "password": "BobPass456!",
+    "id": "1678901234568",
     "role": "sub_admin"
   },
   {
-    "name": "Admin three",
-    "email": "admin3@example.com",
-    "password": "admin3aaa",
+    "name": "Charlie Brown",
+    "email": "charlie.brown@example.com",
+    "password": "CharliePass789!",
+    "id": "1678901234569",
     "role": "sub_admin"
   },
   {
-    "name": "new sub admin",
-    "email": "newsubadmin@example.com",
-    "password": "newsuba",
+    "name": "Diana Prince",
+    "email": "diana.prince@example.com",
+    "password": "DianaPass321!",
+    "id": "1678901234570",
     "role": "sub_admin"
   }
 ]

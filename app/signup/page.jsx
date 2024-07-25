@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Container, TextField, Button, Typography } from '@mui/material';
+import Link from 'next/link';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -26,7 +27,6 @@ const Signup = () => {
       const data = await res.json();
       if (res.ok) {
         router.push('/login');
-        
       } else {
         setError(data.message);
       }
@@ -72,6 +72,12 @@ const Signup = () => {
           Signup
         </Button>
       </form>
+      <Typography variant="body2" align="center" style={{ marginTop: '1rem' }}>
+        Already have an account?{' '}
+        <Link href="/login" passHref color="primary">
+          Login
+        </Link>
+      </Typography>
     </Container>
   );
 };

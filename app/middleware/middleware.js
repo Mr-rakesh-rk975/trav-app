@@ -85,21 +85,33 @@ export function middleware(req) {
     return NextResponse.redirect(url);
   }
 
-  if (role === 'admin' && url.pathname === '/') {
-    url.pathname = '/login';
-    return NextResponse.redirect(url);
-  } else if (role === 'admin' && url.pathname.startsWith('/admin')) {
-    // Allow admin to access admin routes
-    return NextResponse.next();
-  } else if (role === 'admin') {
-    url.pathname = '/admin/dashboard';
-    return NextResponse.redirect(url);
-  } else if (role === 'user' && url.pathname.startsWith('/admin')) {
-    url.pathname = '/login';
-    return NextResponse.redirect(url);
+  if (role === 'admin') {
+    if (url.pathname === '/') {
+      url.pathname = '/admin/dashboard'; // Redirect admin to their dashboard
+      return NextResponse.redirect(url);
+    } else if (url.pathname.startsWith('/admin')) {
+      // Allow admin to access admin routes
+      return NextResponse.next();
+    } else {
+      url.pathname = '/admin/dashboard'; // Redirect admin to their dashboard for any other routes
+      return NextResponse.redirect(url);
+    }
+  } else if (role === 'sub_admin') {
+    if (url.pathname.startsWith('/admin')) {
+      // Allow sub_admin to access admin routes
+      return NextResponse.next();
+    } else {
+      url.pathname = '/admin/dashboard'; // Redirect sub_admin to dashboard if not on admin route
+      return NextResponse.redirect(url);
+    }
   } else if (role === 'user') {
-    // Allow user to access user routes
-    return NextResponse.next();
+    if (url.pathname.startsWith('/admin')) {
+      url.pathname = '/login'; // Redirect user to login if they try to access admin routes
+      return NextResponse.redirect(url);
+    } else {
+      // Allow user to access user routes
+      return NextResponse.next();
+    }
   } else {
     url.pathname = '/login';
     return NextResponse.redirect(url);
